@@ -58,7 +58,7 @@ class TextGenerator:
             self.next_after_1_word_matrix[word_seq_index, next_word_index] += 1
 
     def generate_next_words(self, word_seq, alpha=0):
-        not_found = False
+        next_word_vector = None
         try:
             next_word_vector = self.next_after_2_words_matrix[self.two_words_index_dict[word_seq]] + alpha
         except KeyError as e:  # Failed looking for the 2-word word_seq. Start looking at the last word
@@ -66,13 +66,10 @@ class TextGenerator:
             try:
                 next_word_vector = self.next_after_1_word_matrix[self.one_word_index_dict[new_word_seq]] + alpha
             except KeyError as e2:
-                not_found = True
-        if not_found:
-            return []
+                return []
         likelihoods = next_word_vector / next_word_vector.sum()
         likelihoods_coo = coo_matrix(likelihoods)
         sorted_likelihoods = self.sort_coo(likelihoods_coo)
-        # print(sorted_likelihoods[:5])
         return self.list_of_predicted_words(sorted_likelihoods)
 
     def sort_coo(self, m):
