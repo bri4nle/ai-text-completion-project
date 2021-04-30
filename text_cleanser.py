@@ -11,8 +11,7 @@ class TextCleanser:
             corpus = corpus.replace(spaced, ' {0} '.format(spaced))
         self.corpus_words = corpus.split(' ')
         self.corpus_words = [word for word in self.corpus_words if word != '']
-        distinct_words = list(set(self.corpus_words))  # Filter distinct words
-        return distinct_words
-
-    def get_corpus_words(self):
         return self.corpus_words
+
+    def get_corpus_distinct_words(self):
+        return list(set(self.corpus_words))  # Filter distinct words
