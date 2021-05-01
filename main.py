@@ -14,7 +14,22 @@ def main(file_name):
     total_num_picked = 0
     total_correct_pick = 0
 
-    print('Enter "." at the of the sentence to start a new sentence.')
+   
+    print("""
+                    *** This is an AI Text Completion Program ***
+
+    Instructions:
+
+    Type a phrase and press enter to see AI's suggested predictive words. 
+    TO SELECT A PREDICTIVE WORD: Type the number next to the predictive word and press enter.
+        - AI performance rate increases as you select more predictive words 
+          and decreases if predictive words are not selected.
+        - If AI can not predict any words, it will lose points.
+    TO START A NEW SENTENCE: Enter "." at the end of the sentene and continue typing
+    TO END PROGRAM: End sentence with "." and enter "-1".
+     
+     """)
+   
     while True:
         user_input = input('Start typing: ')
         if user_input == '-1':
