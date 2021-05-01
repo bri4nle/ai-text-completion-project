@@ -1,8 +1,17 @@
 class TextCleanser:
+    """
+    This class cleanses the corpus and transforms it to a list
+    """
     def __init__(self):
         self.corpus_words = ''
 
     def clean_text(self, corpus):
+        """
+        This functions takes the passed in corpus and replaces all invalid characters to valid ones.
+        It also split the corpus word by word and punctuations.
+        :param corpus:
+        :return:
+        """
         corpus = corpus.replace('\n', ' ')
         corpus = corpus.replace('\t', ' ')
         corpus = corpus.replace('“', ' " ')

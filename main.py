@@ -14,7 +14,8 @@ def main(file_name):
     text_gen = TextGenerator(corpus_words)
     
     ui = UserInterface(text_gen) 
-    ui.runProgram() # Starts the program
+    ui.runProgram()  # Starts the program
+
 
 if __name__ == '__main__':
     fname = sys.argv[1]
