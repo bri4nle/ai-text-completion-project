@@ -19,5 +19,5 @@ List of Files:
   
  How the Program Works:
   The program tokenizes corpus.txt. The program asks the user to type a phrase. The program then takes the last two words of the user input and generates next predictive words using markov chains and transition matricies and suggests them to the user. 
-  The user can then select one of them by enter the number next to the predicted word, in which case, the AI performance rate increases. Or the user can continue the phrase with their own word, in which case, the AI performance rate decreases. 
-  To start a new sentence, the user can enter "." at the end of a sentence and continue with a new one. To end the program, the user can end sentence with ".", press enter and type "-1" and press enter. 
+  The user can then select one of them by entering the number next to the predicted word, in which case, the AI performance rate increases. Or the user can continue the phrase with their own word and the AI performance rate decreases. 
+  To start a new sentence, the user can enter "." at the end of a sentence and continue with a new one. To end the program, the user can end a sentence with ".", press enter, type "-1" and press enter. 
