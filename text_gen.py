@@ -1,3 +1,5 @@
+import threading
+
 from scipy.sparse import dok_matrix, coo_matrix
 
 
@@ -19,11 +21,12 @@ class TextGenerator:
         self.next_after_2_words_matrix = None
         self.next_after_1_word_matrix = None
         self.predicted_words = []
+        self.lock = threading.Lock()
         self.setup_data()
-        self.populate_2_words_matrix()
-        self.populate_1_word_matrix()
 
-    def setup_data(self):
+    def setup_data(self, addon=[]):
+        self.lock.acquire()
+        self.corpus_words.extend(addon)
         self.distinct_words = list(set(self.corpus_words))  # Get a list of every words in corpus
         self.distinct_words_count = len(self.distinct_words)  # Get the distinct word count
         # Map each word to an index from distinct words list
@@ -43,6 +46,9 @@ class TextGenerator:
         # Map each 2-word to an index from distinct 2-word list
         self.two_words_index_dict = {word: i for i, word in enumerate(self.distinct_sets_of_2_words)}
         self.one_word_index_dict = {word: i for i, word in enumerate(self.distinct_sets_of_1_word)}
+        self.populate_2_words_matrix()
+        self.populate_1_word_matrix()
+        self.lock.release()
 
     def populate_2_words_matrix(self):
         # Go through the list of 2-word to populate the Transitional Matrix
@@ -83,3 +89,7 @@ class TextGenerator:
             next_word_list.append(self.distinct_words[tup[next_word_index]])
             # print(self.distinct_words[tup[next_word_index]])
         return next_word_list
+
+    def update(self, addon=[]):
+        t = threading.Thread(target=self.setup_data, args=(addon,))
+        t.start()
